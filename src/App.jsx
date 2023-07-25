@@ -1,12 +1,19 @@
 import { Canvas } from '@react-three/fiber'
 import React from 'react'
-import Experience from './Experience'
+import Experience from './Components/Experience'
+import Info from './Components/Info'
 
 export default function App() {
   return (
-    <Canvas gl={{ alpha: false }} camera={{ position: [0, 0, 20], fov: 15 }}>
-      <Experience />
-    </Canvas>
+    <>
+      <Canvas 
+        gl={{ alpha: false }} 
+        camera={{ position: [10.97, 5.7, 18.9], fov: 15 }}
+      >
+        <Experience />
+      </Canvas>
+      <Info />
+    </>
   )
 }
 

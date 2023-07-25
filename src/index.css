@@ -2,9 +2,72 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Poppins;
+  color: white;
+}
+
+a{
+  text-decoration: none;
 }
 
 body, #root{
   height: 100vh;
   width: 100%;
 }
+
+#root{
+  touch-action: none;
+}
+
+.info{
+  position: absolute;
+  width: 100%;
+  bottom: 5%;
+  display: flex;
+
+  & .container{
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    background: rgb(255, 255, 255, 0.05);
+    backdrop-filter: blur(3px);
+    padding: 15px 30px;
+    border-radius: 50px;
+    transition: all 0.3s;
+
+    &:hover{
+      background: rgb(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+    }
+
+    & .about{
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    
+      & a{
+        font-weight: 600;
+      }
+    }
+
+    & .contact{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      & a, p{
+        border: 2px solid white;
+        padding: 5px 10px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+
+
