@@ -1,28 +1,43 @@
-import { MeshReflectorMaterial, OrbitControls, PresentationControls, Text, useGLTF, useTexture } from '@react-three/drei'
+import { MeshReflectorMaterial, PresentationControls, Text, useGLTF, useTexture } from '@react-three/drei'
 import React, { useEffect, useState } from 'react'
 import CameraPosition from '../Helpers/CameraPosition'
+
 
 export default function Experience() {
   return (
     <>
-        {/* <OrbitControls /> */}
         <CameraPosition event="mousedown" />
-        <ambientLight intensity={0.1} />
-        <spotLight position={[0, 10, 0]} intensity={0.5} />
-        <directionalLight position={[-20, 0, -12]} intensity={0.5} />
-        <PresentationControls 
-          global 
-          polar={[-0.2, 0.1]} 
-          azimuth={[ -0.5, 0.75]}
-          config={{mass: 2, tension: 400}}
-          snap={{mass: 4, tension: 400}}
-        >
-          <group position={[0, -1.5, 0]}>
-            <VideoText position={[0, 1.6, -2]}  />
-            <Chair rotation-y={3} position={[-1, 0.1, 3]} />
-            <Ground />
-          </group>
-        </PresentationControls>
+        <spotLight
+        color={[1, 0.25, 0.7]}
+        intensity={1.5}
+        angle={0.6}
+        penumbra={0.5}
+        position={[7, 7, 0]}
+        castShadow
+        shadow-bias={-0.0001}
+      />
+      <spotLight
+        color={[0.14, 0.5, 1]}
+        intensity={2}
+        angle={0.6}
+        penumbra={0.5}
+        position={[-7, 20, 0]}
+        castShadow
+        shadow-bias={-0.0001}
+      />
+      <PresentationControls 
+        global 
+        polar={[-0.2, 0.1]} 
+        azimuth={[ -0.5, 0.75]}
+        config={{mass: 2, tension: 400}}
+        snap={{mass: 4, tension: 400}}
+      >
+        <group position={[0, -1.5, 0]}>
+          <VideoText position={[0, 1.06, -2]}  />
+          <Chair rotation-y={3} position={[-1, 0.1, 3]} />
+          <Ground />
+        </group>
+      </PresentationControls>
     </>
   )
 }
@@ -46,23 +61,25 @@ function VideoText(props) {
 
 
 function Ground(){
-  const [ floor, normal ] = useTexture(["/Materials/Material.jpg", "/Materials/Normal.jpg"])
+  const [ floor, normal] = useTexture(["/Materials/Material4.jpg", "/Materials/Normal4.jpg"])
+
   return(
-    <mesh rotation-x={-1.6}>
+    <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
       <planeGeometry args={[50, 50]} />
       <MeshReflectorMaterial 
         blur={[400, 100]}
         resolution={1024}
-        mixBlur={1}
+        mixBlur={30}
         mixStrength={80}
         roughness={floor}
         depthScale={1}
-        minDepthThreshold={0.4}
-        maxDepthThreshold={1.4}
-        color="#18110e" 
-        metalness={0.5}
+        minDepthThreshold={0.7}
+        maxDepthThreshold={1}
+        depthToBlurRatioBias={0.25}
+        color= {[0.015, 0.015, 0.015]}
+        metalness={0}
         normalMap={normal}
-        normalScale={[1, 1]} 
+        normalScale={[1, 1]}
       >
       </MeshReflectorMaterial>
     </mesh>

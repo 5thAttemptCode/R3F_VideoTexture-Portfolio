@@ -8,7 +8,7 @@ export default function App() {
     <>
       <Canvas 
         gl={{ alpha: false }} 
-        camera={{ position: [10.97, 5.7, 18.9], fov: 15 }}
+        camera={{ position: [16.74, 8.31, 12.68], fov: 15 }}
       >
         <Experience />
       </Canvas>
